@@ -201,11 +201,10 @@ void NFS_Free( void* p ) {
 
 static void* padded_allocate( size_t bytes, size_t alignment ) {
     unsigned char* result = NULL;
-    unsigned char* base =
-        (unsigned char*)std::malloc(((bytes + alignment - 1) / alignment + 1) * alignment);
-    if( base ) {
+    unsigned char* base = (unsigned char*)std::malloc(bytes + alignment + sizeof(base));
+    if (base) {
         // Round up to the next line
-        result = (unsigned char*)((uintptr_t)(base+alignment)&-alignment);
+        result = (unsigned char*)((uintptr_t)(base + alignment + sizeof(base)) & -alignment);
         // Record where block actually starts.
         ((uintptr_t*)result)[-1] = uintptr_t(base);
     }
