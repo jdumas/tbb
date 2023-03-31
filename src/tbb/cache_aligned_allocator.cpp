@@ -201,7 +201,8 @@ void NFS_Free( void* p ) {
 
 static void* padded_allocate( size_t bytes, size_t alignment ) {
     unsigned char* result = NULL;
-    unsigned char* base = (unsigned char*)std::malloc(alignment+bytes);
+    unsigned char* base =
+        (unsigned char*)std::malloc(((bytes + alignment - 1) / alignment + 1) * alignment);
     if( base ) {
         // Round up to the next line
         result = (unsigned char*)((uintptr_t)(base+alignment)&-alignment);
