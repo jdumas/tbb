@@ -249,7 +249,7 @@ namespace internal {
 #if __TBB_TASK_PRIORITY
         //! Pointer to the next offloaded lower priority task.
         /** Used to maintain a list of offloaded tasks inside the scheduler. **/
-        task* next_offloaded;
+        tbb::task* next_offloaded;
 #endif
 
 #if __TBB_PREVIEW_RESUMABLE_TASKS
@@ -510,7 +510,7 @@ public:
         init();
     }
 
-    // Custom constructor for instrumentation of tbb algorithm
+    // Custom constructor for instrumentation of TBB algorithm
     task_group_context ( internal::string_index name )
         : my_kind(bound)
         , my_version_and_traits(3 | default_traits)
